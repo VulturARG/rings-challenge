@@ -1,6 +1,8 @@
 # Integrate with Star Wars API
 API: https://swapi.dev
+
 Documentation: https://swapi.dev/documentation
+
 Doc. People: https://swapi.dev/documentation#people
 
 ## Excercise
