@@ -177,7 +177,7 @@ class StarWarsURLGateway(Gateway):
     ) -> requests.models.Response:
         """Verify response status code.
 
-        Raise an exception if the response status code is 401 or 404.
+        Raise an exception if the response status code is 401, 403 or 404.
         """
         if response.status_code == 401:
             raise GatewayUnauthorized()
