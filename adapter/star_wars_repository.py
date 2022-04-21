@@ -1,7 +1,5 @@
 from typing import Dict, Any
 
-from requests import Response
-
 from domain.star_wars.dataclass import StarWarsCharacter, Film
 from domain.star_wars.repository import Repository
 
