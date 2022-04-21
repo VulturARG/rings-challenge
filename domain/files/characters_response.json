@@ -1,0 +1,89 @@
+{
+    "description": {
+        "count": 3,
+        "next": null,
+        "previous": null,
+        "results": [
+            {
+                "birth_year": "19BBY",
+                "created": "2014-12-09T13:50:51.644000Z",
+                "edited": "2014-12-20T21:17:56.891000Z",
+                "eye_color": "blue",
+                "films": [
+                    "https://swapi.dev/api/films/1/",
+                    "https://swapi.dev/api/films/2/",
+                    "https://swapi.dev/api/films/3/",
+                    "https://swapi.dev/api/films/6/"
+                ],
+                "gender": "male",
+                "hair_color": "blond",
+                "height": "172",
+                "homeworld": "https://swapi.dev/api/planets/1/",
+                "mass": "77",
+                "name": "Luke Skywalker",
+                "skin_color": "fair",
+                "species": [],
+                "starships": [
+                    "https://swapi.dev/api/starships/12/",
+                    "https://swapi.dev/api/starships/22/"
+                ],
+                "url": "https://swapi.dev/api/people/1/",
+                "vehicles": [
+                    "https://swapi.dev/api/vehicles/14/",
+                    "https://swapi.dev/api/vehicles/30/"
+                ]
+            },
+            {
+                "birth_year": "41.9BBY",
+                "created": "2014-12-10T16:20:44.310000Z",
+                "edited": "2014-12-20T21:17:50.327000Z",
+                "eye_color": "blue",
+                "films": [
+                    "https://swapi.dev/api/films/4/",
+                    "https://swapi.dev/api/films/5/",
+                    "https://swapi.dev/api/films/6/"
+                ],
+                "gender": "male",
+                "hair_color": "blond",
+                "height": "188",
+                "homeworld": "https://swapi.dev/api/planets/1/",
+                "mass": "84",
+                "name": "Anakin Skywalker",
+                "skin_color": "fair",
+                "species": [],
+                "starships": [
+                    "https://swapi.dev/api/starships/39/",
+                    "https://swapi.dev/api/starships/59/",
+                    "https://swapi.dev/api/starships/65/"
+                ],
+                "url": "https://swapi.dev/api/people/11/",
+                "vehicles": [
+                    "https://swapi.dev/api/vehicles/44/",
+                    "https://swapi.dev/api/vehicles/46/"
+                ]
+            },
+            {
+                "birth_year": "72BBY",
+                "created": "2014-12-19T17:57:41.191000Z",
+                "edited": "2014-12-20T21:17:50.401000Z",
+                "eye_color": "brown",
+                "films": [
+                    "https://swapi.dev/api/films/4/",
+                    "https://swapi.dev/api/films/5/"
+                ],
+                "gender": "female",
+                "hair_color": "black",
+                "height": "163",
+                "homeworld": "https://swapi.dev/api/planets/1/",
+                "mass": "unknown",
+                "name": "Shmi Skywalker",
+                "skin_color": "fair",
+                "species": [],
+                "starships": [],
+                "url": "https://swapi.dev/api/people/43/",
+                "vehicles": []
+            }
+        ]
+    },
+    "status": 200
+}
