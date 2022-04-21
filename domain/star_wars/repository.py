@@ -1,15 +1,11 @@
 from abc import ABC, abstractmethod
-from typing import Dict, Optional
+from typing import Dict, List, Any
 
 from domain.star_wars.dataclass import StarWarsCharacter
 
 
-class StarWarsRepository(ABC):
+class Repository(ABC):
 
     @abstractmethod
-    def get_characters(self, name: str) -> Dict[str, StarWarsCharacter]:
+    def get_characters(self) -> Dict[str, StarWarsCharacter]:
         """Get the star_wars characters."""
-
-    @abstractmethod
-    def get_film_title_by_url(self, url: str) -> Optional[str]:
-        """Get the star_wars characters films titles."""

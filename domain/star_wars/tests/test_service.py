@@ -2,19 +2,12 @@ import unittest
 from unittest.mock import Mock
 
 from domain.star_wars.dataclass import StarWarsCharacter, Film
-from domain.star_wars.repository import StarWarsRepository
+from domain.star_wars.repository import Repository
 from domain.star_wars.service import StarWarService
 
 
 class ServiceTestCase(unittest.TestCase):
     def setUp(self):
-        self.char_1_no_film_title = StarWarsCharacter(
-            name="Luke Skywalker",
-            films=[
-                Film(title=None, url="https://swapi.dev/api/films/1/"),
-            ],
-        )
-
         self.char_1 = StarWarsCharacter(
             name="Luke Skywalker",
             films=[
@@ -57,64 +50,40 @@ class ServiceTestCase(unittest.TestCase):
             ],
         )
 
-        self.mock_repository = Mock(spec=StarWarsRepository)
+        self.star_wars_characters = {
+            "Luke Skywalker": self.char_1,
+            "Anakin Skywalker": self.char_2,
+            "Shmi Skywalker": self.char_3,
+        }
+
+        self.mock_repository = Mock(spec=Repository)
         self.service = StarWarService(self.mock_repository)
 
     def test_get_characters_by_name(self):
         expected = [self.char_1, self.char_2, self.char_3]
-        star_wars_characters = {
-            "Luke Skywalker": self.char_1,
-            "Anakin Skywalker": self.char_2,
-            "Shmi Skywalker": self.char_3,
-            "Jane Doe": self.char_4,
-            "John Doe": self.char_5,
-        }
-
-        actual = self.service._get_characters_by_name("Skywalker", star_wars_characters)
-        self.assertEqual(expected, actual)
-
-    def test_films_titles_by_url(self):
-        expected = [
-            StarWarsCharacter(
-                name="Luke Skywalker",
-                films=[
-                    Film(title="A New Hope", url="https://swapi.dev/api/films/1/"),
-                ],
-            )
-        ]
-
-        # values returned by the repository
-        self.mock_repository.get_film_title_by_url.return_value = "A New Hope"
-
-        actual = self.service._get_films_titles_by_url([self.char_1_no_film_title])
+        actual = self.service._get_characters_by_name("Skywalker", self.star_wars_characters)
         self.assertEqual(expected, actual)
 
     def test_get_good_api_return_description(self):
 
         expected = "Luke Skywalker participated in A New Hope, The Empire Strikes Back, Return of the Jedi and Revenge of the Sith. Anakin Skywalker participated in The Phantom Menace, Attack of the Clones and Revenge of the Sith. Shmi Skywalker participated in The Phantom Menace and Attack of the Clones."
-        characters = [
-            self.char_1,
-            self.char_2,
-            self.char_3,
-        ]
-
-        actual = self.service._get_fancy_description(characters)
+        actual = self.service._get_fancy_description(self.star_wars_characters)
         self.assertEqual(expected, actual)
 
     def test_get_api_return_description_one_movie(self):
         expected = "John Doe participated in Film 4."
-        characters = [
-            self.char_5,
-        ]
+        characters = {
+            "John Doe": self.char_5,
+        }
 
         actual = self.service._get_fancy_description(characters)
         self.assertEqual(expected, actual)
 
     def test_get_api_return_description_two_movies(self):
         expected = "Jane Doe participated in Film 1 and Film 2."
-        characters = [
-            self.char_4,
-        ]
+        characters = {
+            "Jane Doe": self.char_4,
+        }
 
         actual = self.service._get_fancy_description(characters)
         self.assertEqual(expected, actual)
