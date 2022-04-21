@@ -2,6 +2,7 @@ from typing import Dict, Any
 
 from domain.gateway import ServerConfiguration
 from domain.gateway.swapi_gateway import StarWarsURLGateway
+from domain.star_wars.exceptions import CharacterNotDataError, FilmNotDataError
 from domain.star_wars.gateway_service import StarWarsGatewayService
 
 NOT_FOUND = "Not found"
@@ -15,6 +16,9 @@ def get_film_id_from_url(film_url: str) -> int:
 
 
 def get_film_titles_by_url(base_url: str, characters: Dict[str, Any]) -> Dict[str, str]:
+    if not RESULTS in characters:
+        raise CharacterNotDataError()
+
     server_configuration = ServerConfiguration(
         api_root_url=base_url,
         user=None,
@@ -25,12 +29,15 @@ def get_film_titles_by_url(base_url: str, characters: Dict[str, Any]) -> Dict[st
 
     star_wars_films_titles = {}
     for character in characters[RESULTS]:
+        if not FILMS in character:
+            raise FilmNotDataError()
         for film_url in character[FILMS]:
-            if film_url not in star_wars_films_titles:
-                response = star_wars.get_star_wars_film(get_film_id_from_url(film_url))
-                film = response.json()
-                if TITLE in film:
-                    star_wars_films_titles[film_url] = film[TITLE]
-                else:
-                    star_wars_films_titles[film_url] = NOT_FOUND
+            if film_url in star_wars_films_titles:
+                continue
+            response = star_wars.get_star_wars_film(get_film_id_from_url(film_url))
+            film = response.json()
+            if TITLE in film:
+                star_wars_films_titles[film_url] = film[TITLE]
+            else:
+                star_wars_films_titles[film_url] = NOT_FOUND
     return star_wars_films_titles
