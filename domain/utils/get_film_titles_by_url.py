@@ -1,13 +1,12 @@
-from typing import Dict, Any, List
+from typing import Dict, Any
 
 from domain.gateway import ServerConfiguration
 from domain.gateway.swapi_gateway import StarWarsURLGateway
 from domain.star_wars.gateway_service import StarWarsGatewayService
 
-DESCRIPTION = "description"
+NOT_FOUND = "Not found"
 RESULTS = "results"
 FILMS = "films"
-NAME = "name"
 TITLE = "title"
 
 
@@ -30,5 +29,8 @@ def get_film_titles_by_url(base_url: str, characters: Dict[str, Any]) -> Dict[st
             if film_url not in star_wars_films_titles:
                 response = star_wars.get_star_wars_film(get_film_id_from_url(film_url))
                 film = response.json()
-                star_wars_films_titles[film_url] = film[TITLE]
+                if TITLE in film:
+                    star_wars_films_titles[film_url] = film[TITLE]
+                else:
+                    star_wars_films_titles[film_url] = NOT_FOUND
     return star_wars_films_titles

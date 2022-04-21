@@ -7,8 +7,8 @@ class StarWarsException(Exception):
     MESSAGE: Optional[str] = None
 
 
-class AnyError(StarWarsException):
-    MESSAGE = "example"
+class CharacterNotFoundError(StarWarsException):
+    MESSAGE = "Character Not Found"
 
     def __init__(self) -> None:
         super().__init__(self.MESSAGE)

@@ -2,6 +2,7 @@ from requests import Response
 
 from domain.gateway import ServerConfiguration
 from domain.gateway.swapi_gateway import StarWarsURLGateway
+from domain.star_wars.exceptions import CharacterNotFoundError
 from domain.star_wars.gateway_service import StarWarsGatewayService
 
 
@@ -15,5 +16,8 @@ def get_characters_by_name(base_url: str, name: str) -> Response:
     )
     server_gateway = StarWarsURLGateway(server_configuration)
     star_wars = StarWarsGatewayService(server_gateway)
-    star_wars_characters = star_wars.get_star_wars_characters(params={'search': name})
-    return star_wars_characters
+    characters_response = star_wars.get_star_wars_characters(params={'search': name})
+    star_wars_characters = characters_response.json()
+    if star_wars_characters['count'] == 0:
+        raise CharacterNotFoundError()
+    return characters_response
